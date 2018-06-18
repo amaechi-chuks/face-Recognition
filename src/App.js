@@ -13,23 +13,21 @@ const particlesOptions = {
       value: 90,
       density:{
       enable: true,
-      value_area: 800
+      value_area: 800,
+      interactivity: {
+        detect_on: 'canvas',
+        events: {
+          onhover: {
+            enable: true,
+            mode: 'repulse'
+          }
+        }
+      }
       
       }
-    },
-    interactivity: {
-      detect_on: "canvas",
-      events: {
-        onhover: {
-          enable: true,
-          mode: "repulse"
-        }
-      },
     }
-    
-  },
-  
     }
+   }
 
 class App extends Component {
   render() {
