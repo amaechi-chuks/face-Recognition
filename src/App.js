@@ -10,14 +10,27 @@ import './App.css';
 const particlesOptions = {
   particles: {
     number: {
-      value: 85,
+      value: 90,
       density:{
       enable: true,
       value_area: 800
+      
       }
+    },
+    interactivity: {
+      detect_on: "canvas",
+      events: {
+        onhover: {
+          enable: true,
+          mode: "repulse"
+        }
+      },
     }
-  }
-}
+    
+  },
+  
+    }
+
 class App extends Component {
   render() {
     return (
