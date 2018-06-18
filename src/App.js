@@ -1,3 +1,4 @@
+//import all our components and react 
 import React, { Component } from 'react';
 import Navigation from './components/Navigation/Navigation';
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
@@ -6,7 +7,7 @@ import Logo from './components/Logo/Logo';
 import Particles from 'react-particles-js';
 import './App.css';
 
-
+// declaring particles functionality
 const particlesOptions = {
   particles: {
     number: {
@@ -28,16 +29,17 @@ const particlesOptions = {
     }
     }
    }
-
+//declaring our class 
 class App extends Component {
+  // creating a state for the App
   constructor(){
     super();
     this.state = {
-      input: '',
+      input: '', //what the user will input 
     }
   }
   onInputChange = (event) => {
-console.log(event)
+console.log(event.target.value)
   }
   render() {
     return (
@@ -48,7 +50,7 @@ console.log(event)
         <Navigation />
          <Logo />
          <Rank />
-         <ImageLinkForm  onInputChange={this.onInputChange}/>
+         <ImageLinkForm  onInputChange={this.onInputChange}/> {/*passing onInputChange as a props */ }
          {/*
          <faceRecognition />*/}
       </div>

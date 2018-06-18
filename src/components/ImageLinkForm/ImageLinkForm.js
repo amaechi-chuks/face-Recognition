@@ -1,6 +1,7 @@
 import React from 'react';
 import './ImageLinkForm.css';
 
+//destructuring onInputChange
 const ImageLinkForm = ({onInputChange}) =>{
     return( 
         <div>
