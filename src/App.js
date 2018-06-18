@@ -42,14 +42,17 @@ class App extends Component {
     super();
     this.state = {
       input: '', //what the user will input 
+      imageUrl: ''
     }
   }
   onInputChange = (event) => {
 console.log(event.target.value)
   }
   onButtonSubmit = () => {
-    console.log('click');
-    app.models.predict("a403429f2ddf4b49b307e318f00e528b",
+    this.setState({imageUrl:this.state.input});
+    app.models
+    .predict(
+      Clarifai.COLOR_MODEL,
      "https://samples.clarifai.com/face-det.jpg").then(
     function(response) {
       console.log(response);
@@ -70,7 +73,7 @@ console.log(event.target.value)
          <Logo />
          <Rank />
          <ImageLinkForm  onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit}/> {/*passing onInputChange as a props */ }
-         <FaceRecognition />
+         <FaceRecognition imageUrl={this.state.imageUrl}/>
       </div>
     );
   }
