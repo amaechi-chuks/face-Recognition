@@ -52,10 +52,10 @@ this.setState({input:event.target.value})
     this.setState({imageUrl:this.state.input});
     app.models
     .predict(
-      Clarifai.COLOR_MODEL,
-     this.state.input).then(
+      Clarifai.FACE_DETECT_MODEL,
+     this.state.input ).then(
     function(response) {
-      console.log(response);
+      console.log(response.outputs[0].data.regions[0].region_info.bounding_box);
       // do something with response
     },
     function(err) {
