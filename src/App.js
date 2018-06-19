@@ -9,6 +9,7 @@ import Particles from 'react-particles-js';
 import Clarifai from 'clarifai';
 import './App.css';
 
+//declaring our API from clarifai
 const app = new Clarifai.App({
   apiKey: 'bc14a49b4cfe445593213a6095ac1f5f'
  });
@@ -42,28 +43,36 @@ class App extends Component {
     super();
     this.state = {
       input: '', //what the user will input 
-      imageUrl: ''
+      imageUrl: '',
+      box: {},
     }
   }
+
+  calculateFaceLocation = (data) => {
+const clarifaiFace = data.outputs[0].data.regions[0].region_info.bounding_box;
+const image = document.getElementById('inputimage');
+const width = Number(image.width);
+const height = Number(image.height);
+console.log(width, height);
+  }
+
   onInputChange = (event) => {
 this.setState({input:event.target.value})
   }
+
   onButtonSubmit = () => {
     this.setState({imageUrl:this.state.input});
     app.models
     .predict(
       Clarifai.FACE_DETECT_MODEL,
-     this.state.input ).then(
-    function(response) {
-      console.log(response.outputs[0].data.regions[0].region_info.bounding_box);//get our response from clarifai API
-      // do something with response
-    },
-    function(err) {
-      // there was an error
-      console.log('ops! you messed up', err)
-    }
+      //response for image recognition
+     this.state.input ).then(response =>
+      this.calculateFaceLocation(response)
+      // error catch
+    .catch(err => console.log('ops! you messed up', err))
   );
   }
+
   render() {
     return (
       <div className="App">
