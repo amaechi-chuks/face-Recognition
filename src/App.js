@@ -55,11 +55,12 @@ this.setState({input:event.target.value})
       Clarifai.FACE_DETECT_MODEL,
      this.state.input ).then(
     function(response) {
-      console.log(response.outputs[0].data.regions[0].region_info.bounding_box);
+      console.log(response.outputs[0].data.regions[0].region_info.bounding_box);//get our response from clarifai API
       // do something with response
     },
     function(err) {
       // there was an error
+      console.log('ops! you messed up', err)
     }
   );
   }
