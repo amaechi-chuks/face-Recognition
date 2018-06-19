@@ -91,7 +91,7 @@ this.setState({input:event.target.value})
          <Logo />
          <Rank />
          <ImageLinkForm  onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit}/> {/*passing onInputChange as a props */ }
-         <FaceRecognition imageUrl={this.state.imageUrl}/>
+         <FaceRecognition box={this.state.box} imageUrl={this.state.imageUrl}/>
       </div>
     );
   }
