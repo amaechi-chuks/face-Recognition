@@ -6,6 +6,7 @@ import FaceRecognition from './components/FaceRecognition/FaceRecognition';
 import SignIn from './components/SignIn/SignIn';
 import Register from './components/Register/Register';
 import Rank from './components/Rank/Rank';
+import Footer from './components/Footer/Footer';
 import Logo from './components/Logo/Logo';
 import Particles from 'react-particles-js';
 import Clarifai from 'clarifai';
@@ -116,7 +117,7 @@ onRouteChange = (route) => {
            :<Register  onRouteChange = {this.onRouteChange}/>
         )
         }
-      
+      <Footer />
       </div>
     );
   }

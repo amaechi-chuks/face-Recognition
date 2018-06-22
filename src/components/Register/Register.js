@@ -4,6 +4,12 @@ import React from 'react';
 
 const Register = ({onRouteChange}) => {
     return (
+    
+        <div>
+        <p className='f3'>
+                {'Welcome to Facial Recognition App...Register!'}
+            </p>
+        
         <article className="br3 ba  b--black-10 mv4 w-100 w-50-m w-25-l shadow-5 mw6 center">
            <main className="pa4 black-80">
   <div className="measure">
@@ -36,7 +42,9 @@ const Register = ({onRouteChange}) => {
 </main>
 </article>
  
-        
+    </div>       
     );
 }
+   
+
 export default Register;
