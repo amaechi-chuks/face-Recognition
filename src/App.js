@@ -83,7 +83,7 @@ class App extends Component {
         this.state.input)
       .then(response => this.displayFaceBox(this.calculateFaceLocation(response))
         // error catch
-        .catch(err => console.log('ops! you messed up', err))
+        .catch(err => err + 'ops! you messed up')
       );
   }
 onRouteChange = (route) => {
