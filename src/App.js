@@ -49,11 +49,38 @@ class App extends Component {
       imageUrl: '',
       box: {},
       route: 'SignIn',
-      isSignIn: false
-
+      isSignIn: false,
+       user:{
+        id: '',
+        name: '',
+        email: '',
+        entries: '',
+        joined:''
+       }
     }
   }
+  
+  //loading a user from front-end
+  loadUser = (data) => {
+    this.setState({user:{
+             id: data.id,
+            name: data.name,
+            email: data.email,
+            entries: data.entries,
+            joined: data.joined
+    }})
+      }
+ 
+  //fetching all the users from face-server
+  componentDidMount() {
+    fetch('http://localhost:8000/')
+    .then(resp => resp.json())
+    .then(console.log)
+    
+  }
+  
 
+//image calculation(width, height)
   calculateFaceLocation = (data) => {
     const clarifaiFace = data.outputs[0].data.regions[0].region_info.bounding_box;
     const image = document.getElementById('inputimage');
@@ -114,7 +141,7 @@ onRouteChange = (route) => {
         :(
            this.state.route === 'SignIn'
            ?<SignIn onRouteChange = {this.onRouteChange}/>
-           :<Register  onRouteChange = {this.onRouteChange}/>
+           :<Register loadUser ={this.loadUser} onRouteChange = {this.onRouteChange}/>
         )
         }
       <Footer />
