@@ -1,3 +1,4 @@
+
 //import all our components and react 
 import React, { Component } from 'react';
 import Navigation from './components/Navigation/Navigation';
@@ -54,7 +55,7 @@ class App extends Component {
         id: '',
         name: '',
         email: '',
-        entries: '',
+        entries: 0,
         joined:''
        }
     }
@@ -70,7 +71,7 @@ class App extends Component {
             joined: data.joined
     }})
       }
- 
+ /*
   //fetching all the users from face-server
   componentDidMount() {
     fetch('http://localhost:8000/')
@@ -78,7 +79,7 @@ class App extends Component {
     .then(console.log)
     
   }
-  
+  */
 
 //image calculation(width, height)
   calculateFaceLocation = (data) => {
@@ -103,16 +104,32 @@ class App extends Component {
   }
 
   onButtonSubmit = () => {
-    this.setState({ imageUrl: this.state.input });
+    
+    this.setState({ imageUrl: this.state.input })
     app.models
       .predict(
         Clarifai.FACE_DETECT_MODEL,
-        //response for image recognition
         this.state.input)
-      .then(response => this.displayFaceBox(this.calculateFaceLocation(response))
-        // error catch
-        .catch(err => err + 'ops! you messed up')
-      );
+      .then(response => {  
+        if(response){
+          fetch('http://localhost:8000/image', {
+            method: 'put',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+              id: this.state.user.id
+              
+          })
+        })
+        .then(response => response.json())
+        .then(count => {
+          this.setState(Object.assign(this.state.user, { entries: count }))
+        })
+        }
+        this.displayFaceBox(this.calculateFaceLocation(response))
+        
+        
+      })
+      .catch(err => console.log(err))
   }
 onRouteChange = (route) => {
   if(route === 'signOut'){
@@ -120,27 +137,31 @@ onRouteChange = (route) => {
   }else if (route === 'home') {
     this.setState({isSignIn: true})
   }
-  this.setState({route: route});
+  this.setState({route: route})
 }
   render() {
+    const { isSignIn, imageUrl, route, box } = this.state;
     return (
       <div className="App">
         <Particles className='particles'
           params={particlesOptions}
         />
-        <Navigation isSignIn={this.state.isSignIn} onRouteChange={this.onRouteChange}/>
-        {  this.state.route === 'home'
+        <Navigation isSignIn={isSignIn} onRouteChange={this.onRouteChange}/>
+        {  route === 'home'
         ?<div>
         <Logo />
-        <Rank />
+        <Rank 
+          name = {this.state.user.name}
+          entries = {this.state.user.entries}
+        />
         <ImageLinkForm
          onInputChange={this.onInputChange}
           onButtonSubmit={this.onButtonSubmit} />
-        <FaceRecognition box={this.state.box} imageUrl={this.state.imageUrl} />
+        <FaceRecognition box={box} imageUrl={imageUrl} />
         </div>
         :(
            this.state.route === 'SignIn'
-           ?<SignIn onRouteChange = {this.onRouteChange}/>
+           ?<SignIn loadUser={this.loadUser} onRouteChange = {this.onRouteChange}/>
            :<Register loadUser ={this.loadUser} onRouteChange = {this.onRouteChange}/>
         )
         }
@@ -151,3 +172,6 @@ onRouteChange = (route) => {
 }
 
 export default App;
+
+
+
