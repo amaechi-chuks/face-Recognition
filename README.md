@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 [![Build Status](https://travis-ci.com/amaechi-chuks/face-Recognition.svg?branch=master)](https://travis-ci.com/amaechi-chuks/face-Recognition)
 
 [![Coverage Status](https://coveralls.io/repos/github/amaechi-chuks/face-Recognition/badge.svg?branch=master)](https://coveralls.io/github/amaechi-chuks/face-Recognition?branch=master)
