@@ -19,7 +19,7 @@ constructor(props){
   }
 
   onSubmitSignIn = () => {
-    fetch('https://infinite-inlet-36667.herokuapp.com/signIn', {
+    fetch('https://enigmatic-anchorage-42420.herokuapp.com/signin', {
       method: 'post',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({

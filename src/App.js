@@ -70,15 +70,6 @@ class App extends Component {
             joined: data.joined
     }})
       }
- /*
-  //fetching all the users from face-server
-  componentDidMount() {
-    fetch('http://localhost:8000/')
-    .then(resp => resp.json())
-    .then(console.log)
-    
-  }
-  */
 
 //image calculation(width, height)
   calculateFaceLocation = (data) => {
@@ -105,7 +96,7 @@ class App extends Component {
   onButtonSubmit = () => {
     
     this.setState({ imageUrl: this.state.input });
-    fetch('https://infinite-inlet-36667.herokuapp.com/imageUrl', {
+    fetch('https://enigmatic-anchorage-42420.herokuapp.com/imageurl', {
       method: 'post',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
@@ -116,7 +107,7 @@ class App extends Component {
   .then(response => response.json())
       .then(response => {  
         if(response){
-          fetch('https://infinite-inlet-36667.herokuapp.com/image', {
+          fetch('https://enigmatic-anchorage-42420.herokuapp.com/image', {
             method: 'put',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
